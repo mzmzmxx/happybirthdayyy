@@ -25,7 +25,7 @@
             --text-color: #333;
             --background-start: #9FB3DF;
             --background-end: #C5E0E8;
-            --accent-color: #9FB3DF;
+            --accent-color: #F7D08A;
             --font-main: 'HSSanTokki20-Regular', cursive;
             --font-sub: 'NanumSquareRound', sans-serif;
         }
@@ -45,7 +45,7 @@
 
         .container {
             max-width: 600px;
-            padding: 30px 50px 50px;
+            padding: 30px;
             background: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -61,7 +61,7 @@
             color: var(--primary-color);
             margin-top: 1.5rem;
             margin-bottom: 2.5rem;
-            animation: bounceIn 1.5s ease-out, h1-glow 3s infinite alternate ease-in-out;
+            animation: bounceIn 1.5s ease-out;
         }
 
         p {
@@ -81,7 +81,14 @@
             font-size: 1.5rem;
             color: var(--primary-color);
         }
-        
+
+        .celebration-text span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: celebration-fall 1.5s forwards ease-out;
+        }
+
         .confetti-container {
             position: fixed;
             top: 0;
@@ -171,16 +178,16 @@
             50% { transform: scale(1.02); }
             100% { transform: scale(1); }
         }
-        
-        @keyframes h1-glow {
-            0% { text-shadow: 0 0 1rem var(--secondary-color), 0 0 2rem var(--secondary-color), 0 0 3rem var(--accent-color); }
-            50% { text-shadow: 0 0 2rem var(--secondary-color), 0 0 4rem var(--secondary-color), 0 0 6rem var(--accent-color); }
-            100% { text-shadow: 0 0 1rem var(--secondary-color), 0 0 2rem var(--secondary-color), 0 0 3rem var(--accent-color); }
-        }
 
         @keyframes confetti-fall {
             0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(720deg); opacity: 0.5; }
+        }
+        
+        @keyframes celebration-fall {
+            0% { transform: translateY(-50px); opacity: 0; }
+            50% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
@@ -193,7 +200,23 @@
         <p>이건 첫 번째 레슨 윤지인 생일 알기</p>
         <p>이제 두 번째 레슨 행복도 너만 갖기</p>
         <p>드디어 세 번째 레슨 돈길만걷기아프지않기행복하기</p>
-        <div class="celebration-text">🎉 늘 행 복 해 야 해 🥳</div>
+        <div class="celebration-text">
+            <span>🎉</span>
+            <span> </span>
+            <span>늘</span>
+            <span> </span>
+            <span>행</span>
+            <span> </span>
+            <span>복</span>
+            <span> </span>
+            <span>해</span>
+            <span> </span>
+            <span>야</span>
+            <span> </span>
+            <span>해</span>
+            <span> </span>
+            <span>🥳</span>
+        </div>
     </div>
 
     <script>
@@ -232,6 +255,11 @@
         }
 
         setInterval(createConfetti, 200);
+
+        const celebrationSpans = document.querySelectorAll('.celebration-text span');
+        celebrationSpans.forEach((span, index) => {
+            span.style.animationDelay = `${0.1 * index}s`;
+        });
     </script>
 </body>
 </html>
