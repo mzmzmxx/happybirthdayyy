@@ -19,13 +19,13 @@
             font-style: normal;
         }
 
-        /* CSS Custom Properties (변수) */
         :root {
             --primary-color: #9EC6F3;
             --secondary-color: #BDDDE4;
             --text-color: #333;
             --background-start: #9FB3DF;
             --background-end: #C5E0E8;
+            --accent-color: #9FB3DF;
             --font-main: 'HSSanTokki20-Regular', cursive;
             --font-sub: 'NanumSquareRound', sans-serif;
         }
@@ -44,8 +44,8 @@
         }
 
         .container {
-            max-width: 90vw;
-            padding: 2vw;
+            max-width: 600px;
+            padding: 30px 50px 50px;
             background: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -57,16 +57,16 @@
 
         h1 {
             font-family: var(--font-main);
-            font-size: 7vw;
+            font-size: 3rem;
             color: var(--primary-color);
-            margin-top: 3vw;
-            margin-bottom: 5vw;
-            animation: bounceIn 1.5s ease-out;
+            margin-top: 1.5rem;
+            margin-bottom: 2.5rem;
+            animation: bounceIn 1.5s ease-out, h1-glow 3s infinite alternate ease-in-out;
         }
 
         p {
-            font-size: 3vw;
-            margin: 1.5vw 0;
+            font-size: 1.2rem;
+            margin: 0.8rem 0;
             line-height: 1.5;
             animation: text-pop 3s ease-in-out infinite;
         }
@@ -77,8 +77,8 @@
 
         .celebration-text {
             font-weight: 700;
-            margin-top: 3vw;
-            font-size: 4vw;
+            margin-top: 1.5rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
         }
         
@@ -95,27 +95,64 @@
 
         .confetti {
             position: absolute;
-            width: 1.5vw;
-            height: 1.5vw;
+            width: 15px;
+            height: 15px;
             background-color: var(--primary-color);
             border-radius: 50%;
             animation: confetti-fall 5s linear infinite;
         }
         .confetti.square {
-            width: 1.2vw;
-            height: 1.2vw;
+            width: 12px;
+            height: 12px;
             border-radius: 0;
             transform: rotate(45deg);
         }
         .confetti.triangle {
             width: 0;
             height: 0;
-            border-left: 0.8vw solid transparent;
-            border-right: 0.8vw solid transparent;
-            border-bottom: 1.5vw solid var(--primary-color);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 15px solid var(--primary-color);
             border-radius: 0;
             background-color: transparent !important;
             transform: rotate(0deg);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                max-width: 90vw;
+                padding: 4vw;
+            }
+
+            h1 {
+                font-size: 8vw;
+                margin-top: 3vw;
+                margin-bottom: 5vw;
+            }
+
+            p {
+                font-size: 4vw;
+                margin: 2vw 0;
+            }
+
+            .celebration-text {
+                font-size: 5vw;
+                margin-top: 3vw;
+            }
+            
+            .confetti {
+                width: 2vw;
+                height: 2vw;
+            }
+            .confetti.square {
+                width: 1.5vw;
+                height: 1.5vw;
+            }
+            .confetti.triangle {
+                border-left: 1vw solid transparent;
+                border-right: 1vw solid transparent;
+                border-bottom: 2vw solid var(--primary-color);
+            }
         }
 
         @keyframes fadeIn {
@@ -133,6 +170,12 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.02); }
             100% { transform: scale(1); }
+        }
+        
+        @keyframes h1-glow {
+            0% { text-shadow: 0 0 1rem var(--secondary-color), 0 0 2rem var(--secondary-color), 0 0 3rem var(--accent-color); }
+            50% { text-shadow: 0 0 2rem var(--secondary-color), 0 0 4rem var(--secondary-color), 0 0 6rem var(--accent-color); }
+            100% { text-shadow: 0 0 1rem var(--secondary-color), 0 0 2rem var(--secondary-color), 0 0 3rem var(--accent-color); }
         }
 
         @keyframes confetti-fall {
