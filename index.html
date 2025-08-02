@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Happy Birthday!</title>
+
+    <style>
+        @font-face {
+            font-family: 'HSSanTokki20-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'NanumSquareRound';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* CSS Custom Properties (변수) */
+        :root {
+            --primary-color: #9EC6F3;
+            --secondary-color: #BDDDE4;
+            --text-color: #333;
+            --background-start: #9FB3DF;
+            --background-end: #C5E0E8;
+            --font-main: 'HSSanTokki20-Regular', cursive;
+            --font-sub: 'NanumSquareRound', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--background-start), var(--background-end));
+            color: var(--text-color);
+            font-family: var(--font-sub);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 90vw;
+            padding: 2vw;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 2s ease-in-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: var(--font-main);
+            font-size: 7vw;
+            color: var(--primary-color);
+            margin-top: 3vw;
+            margin-bottom: 5vw;
+            animation: bounceIn 1.5s ease-out;
+        }
+
+        p {
+            font-size: 3vw;
+            margin: 1.5vw 0;
+            line-height: 1.5;
+            animation: text-pop 3s ease-in-out infinite;
+        }
+        
+        .container p:nth-child(2) { animation-delay: 0.5s; }
+        .container p:nth-child(3) { animation-delay: 1s; }
+        .container p:nth-child(4) { animation-delay: 1.5s; }
+
+        .celebration-text {
+            font-weight: 700;
+            margin-top: 3vw;
+            font-size: 4vw;
+            color: var(--primary-color);
+        }
+        
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 1.5vw;
+            height: 1.5vw;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            animation: confetti-fall 5s linear infinite;
+        }
+        .confetti.square {
+            width: 1.2vw;
+            height: 1.2vw;
+            border-radius: 0;
+            transform: rotate(45deg);
+        }
+        .confetti.triangle {
+            width: 0;
+            height: 0;
+            border-left: 0.8vw solid transparent;
+            border-right: 0.8vw solid transparent;
+            border-bottom: 1.5vw solid var(--primary-color);
+            border-radius: 0;
+            background-color: transparent !important;
+            transform: rotate(0deg);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.1); opacity: 0; }
+            60% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes text-pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="confetti-container">
+    </div>
+
+    <div class="container">
+        <h1>윤지인생일축하한드아악</h1>
+        <p>이건 첫 번째 레슨 윤지인 생일 알기</p>
+        <p>이제 두 번째 레슨 행복도 너만 갖기</p>
+        <p>드디어 세 번째 레슨 돈길만걷기아프지않기행복하기</p>
+        <div class="celebration-text">🎉 늘 행 복 해 야 해 🥳</div>
+    </div>
+
+    <script>
+        const confettiContainer = document.querySelector('.confetti-container');
+        const colors = ['#9EC6F3', '#BDDDE4', '#FFF1D5', '#C5D3E8', '#D0E8C5', '#BDDDE4'];
+        const shapes = ['', 'square', 'triangle'];
+        
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+            
+            if (randomShape === 'square') {
+                confetti.classList.add('confetti', 'square');
+            } else if (randomShape === 'triangle') {
+                confetti.classList.add('confetti', 'triangle');
+            } else {
+                confetti.classList.add('confetti');
+            }
+
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+            
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            if (randomShape === 'triangle') {
+                confetti.style.borderBottomColor = randomColor;
+            } else {
+                confetti.style.backgroundColor = randomColor;
+            }
+            
+            confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+            confettiContainer.appendChild(confetti);
+
+            confetti.addEventListener('animationend', () => {
+                confetti.remove();
+            });
+        }
+
+        setInterval(createConfetti, 200);
+    </script>
+</body>
+</html>
